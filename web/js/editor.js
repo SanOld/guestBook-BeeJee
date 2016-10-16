@@ -38,10 +38,21 @@ $(document).ready(function() {
     $("[preview=preview]").remove();
     var tr = $( "tr:first" ).clone();
     tr.find(".panel-heading").text("Предварительный просмотр");
+    
+
+
+     
+//    var ctx2 = canv.getContext('2d');
+//    ctx.drawImage(image, 0, 0, image.width, image.height);
     tr.find(".panel-body").text($("[field=text]").val());
+$( "canvas" ).clone().appendTo( ".panel-body" );
     tr.find(".panel-footer").text('');
     tr.attr('preview', 'preview');
     tr.appendTo("table");                     
   });
+  
+  $( '#addImage').on( 'click', function(){
+    $( '#photo').trigger('click');
+  })
  
 })

@@ -1,6 +1,6 @@
 
-    var previewWidth = 320, // ширина превью
-        previewHeight = 240, // высота превью
+    var maxWidth = 320, // ширина превью
+        maxHeight = 240, // высота превью
         maxFileSize = 2 * 1024 * 1024, // (байт) Максимальный размер файла (2мб)
         selectedFiles = {},// объект, в котором будут храниться выбранные файлы
         queue = [],
@@ -9,34 +9,34 @@
         isProcessing = false,
         errorMsg, // сообщение об ошибке при валидации файла
         previewPhotoContainer = document.querySelector('#preview-photo'); // контейнер, в котором будут отображаться превью
- 
+
     // Когда пользователь выбрал файлы, обрабатываем их
     $('input[type=file][id=photo]').on('change', function() {
-        var newFiles = $(this)[0].files; // массив с выбранными файлами
- 
-        for (var i = 0; i < newFiles.length; i++) {
- 
-            var file = newFiles[i];
- 
-            // В качестве "ключей" в объекте selectedFiles используем названия файлов
-            // чтобы пользователь не мог добавлять один и тот же файл
-            // Если файл с текущим названием уже существует в массиве, переходим к следующему файлу
-            if (selectedFiles[file.name] != undefined) continue;
- 
-            // Валидация файлов (проверяем формат и размер)
-            if ( errorMsg = validateFile(file) ) {
-                alert(errorMsg);
-                return;
-            }
- 
-            // Добавляем файл в объект selectedFiles
-            selectedFiles[file.name] = file;
-            queue.push(file);
- 
+      var newFiles = $(this)[0].files; // массив с выбранными файлами
+
+      for (var i = 0; i < newFiles.length; i++) {
+
+        var file = newFiles[i];
+
+        // В качестве "ключей" в объекте selectedFiles используем названия файлов
+        // чтобы пользователь не мог добавлять один и тот же файл
+        // Если файл с текущим названием уже существует в массиве, переходим к следующему файлу
+        if (selectedFiles[file.name] != undefined) continue;
+
+        // Валидация файлов (проверяем формат и размер)
+        if ( errorMsg = validateFile(file) ) {
+            alert(errorMsg);
+            return;
         }
- 
-        $(this).val('');
-        processQueue(); // запускаем процесс создания миниатюр
+
+        // Добавляем файл в объект selectedFiles
+        selectedFiles[file.name] = file;
+        queue.push(file);
+
+      }
+
+      $(this).val('');
+      processQueue(); // запускаем процесс создания миниатюр
     });
  
     // Валидация выбранного файла (формат, размер)
@@ -77,6 +77,8 @@
         var span = document.createElement('SPAN');
         var spanDel = document.createElement('SPAN');
         var canvas = document.createElement('CANVAS');
+        canvas.height = maxHeight;
+        canvas.width = maxWidth;
         var ctx = canvas.getContext('2d');
  
         span.setAttribute('class', 'img');
@@ -88,14 +90,27 @@
         li.setAttribute('data-id', file.name);
  
         image.removeEventListener('load', imgLoadHandler, false);
- 
+
         // создаем миниатюру
         imgLoadHandler = function() {
-            ctx.drawImage(image, 0, 0, previewWidth, previewHeight);
-            URL.revokeObjectURL(image.src);
-            span.appendChild(canvas);
-            isProcessing = false;
-            setTimeout(processQueue, 200); // запускаем процесс создания миниатюры для следующего изображения
+          var koefHeight=image.height/maxHeight;
+          var koefWidth=image.width/maxWidth;
+          if(koefHeight > koefWidth && koefHeight > 1){
+            image.height = maxHeight;
+            image.width = image.width/koefHeight;
+          } else if(koefWidth > koefHeight && koefWidth > 1){
+            image.height = maxHeight/koefWidth;
+            image.width = maxWidth;
+          } 
+          
+          var previewWidth = image.width;
+          var previewHeight = image.height;
+          
+          ctx.drawImage(image, 0, 0, previewWidth, previewHeight);
+          URL.revokeObjectURL(image.src);
+          span.appendChild(canvas);
+          isProcessing = false;
+          setTimeout(processQueue, 200); // запускаем процесс создания миниатюры для следующего изображения
         };
  
         // Выводим миниатюру в контейнере previewPhotoContainer

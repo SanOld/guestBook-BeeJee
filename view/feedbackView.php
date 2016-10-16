@@ -56,7 +56,8 @@
                 </table>    
             </div>
             
-            <div class="row pull-left">
+            <div class="row ">
+              <div class="col-sm-6 pull-left">  
                 <form id="editform" class="form-horizontal" method="get" action="<?php echo  BASE_URL ;?>">
                     <input type="text" class="form-control"  name="cr" value="editorFeedback" style="display: none">
                     <input type="text" class="form-control"  name="action" value="save" style="display: none">
@@ -77,36 +78,37 @@
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label">
-                        Текст
-                        сообщения
+                        Отзыв
                     </label>
                     <div class="col-sm-10">
                       <input type="text " class="form-control"  name="fields[]" value="text" style="display: none">
-                      <!--<input type="text" class="form-control"  name="values[]" value="" style="display: none">-->
                       <textarea  class="form-control"  name="values[]" value="" field ="text" cols="40" rows="6" required ></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <button type="button" id="addImage" class="btn btn-default pull-right">Добавить изображение</button>
                     </div>
                   </div>  
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <button type="button" id="sbt" class="btn btn-default">Сохранить</button>
-                      <button type="button" id="preview" class="btn btn-default">Предварительный просмотр</button>
+                      <button type="button" id="preview" class="btn btn-default pull-right">Предварительный просмотр</button>
                     </div>
                   </div>
                 </form>
-                
-                
-              <form id="imageForm" action="<?php echo  BASE_URL ;?>" method="post" >
-                  <input type="text" class="form-control"  name="cr" value="editorFeedback" style="display: none">
-                  <input type="text" class="form-control"  name="action" value="saveImage" style="display: none">
+              </div>  
+              <div class="col-sm-6">  
+              <form id="imageForm" action="<?php echo  BASE_URL . '?cr=editorFeedback&action=saveImage' ;?>" method="post" >
                   <div>
-                      <input type="file" multiple="" id="photo">
+                      <input type="file"  id="photo" style="display: none">
                   </div>
                   <div>
                       <ul id="preview-photo">
                       </ul>
                   </div>
               </form>
-
+              </div>  
             </div>            
         </div> 
 		</div>
