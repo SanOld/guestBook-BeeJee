@@ -77,6 +77,7 @@
         var span = document.createElement('SPAN');
         var spanDel = document.createElement('SPAN');
         var canvas = document.createElement('CANVAS');
+
         canvas.height = maxHeight;
         canvas.width = maxWidth;
         var ctx = canvas.getContext('2d');
@@ -88,7 +89,7 @@
         li.appendChild(span);
         li.appendChild(spanDel);
         li.setAttribute('data-id', file.name);
- 
+
         image.removeEventListener('load', imgLoadHandler, false);
 
         // создаем миниатюру
@@ -111,6 +112,12 @@
           span.appendChild(canvas);
           isProcessing = false;
           setTimeout(processQueue, 200); // запускаем процесс создания миниатюры для следующего изображения
+          
+          
+        $('#preview-photo').append(
+            '<input type="hidden"  name="photos[]" value="' + canvas.toDataURL() + '" data-id="' + file.name+ '">'
+        );          
+          
         };
  
         // Выводим миниатюру в контейнере previewPhotoContainer
@@ -120,15 +127,18 @@
  
         // Сохраняем содержимое оригинального файла в base64 в отдельном поле формы
         // чтобы при отправке формы файл был передан на сервер
-        var fr = new FileReader();
-        fr.readAsDataURL(file);
-        fr.onload = (function (file) {
-            return function (e) {
-                $('#preview-photo').append(
-                        '<input type="hidden" name="photos[]" value="' + e.target.result + '" data-id="' + file.name+ '">'
-                );
-            }
-        }) (file);
+//        var fr = new FileReader();
+//        fr.readAsDataURL(file);
+//        fr.onload = (function (file) {
+//            return function (e) {
+//                $('#preview-photo').append(
+//                        '<input type="hidden"  name="photos[]" value="' + e.target.result + '" data-id="' + file.name+ '">'
+//                );
+//            }
+//        }) (file);
+
+
+        
     };
  
     // Удаление фотографии

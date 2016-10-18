@@ -21,6 +21,8 @@
                 <tbody>   
                    <?php
                    foreach($model->data as $key=>$feedback){
+                     $eye = $feedback['status'] ? 'fa-eye' : 'fa-eye-slash';
+                     if($feedback['status'] || $this->user['login'] == 'admin'){
                        echo
                             "<tr data-rowid=$key >  
                               <td>
@@ -30,16 +32,23 @@
                                   <div class='pull-right'>(".$feedback[created_at].")</div>"
                        ;
                                  if($this->user['login'] == 'admin'){
-                                    echo   "<a  title='Edit'  class='tools' href='" . BASE_URL . "cr=editorFeedback&action=edit&rowid=" .$key. "'>
+                                    echo   "
+                                            <a  title='Status'  class='tools' data-rowid=".$key.">
+                                              <span class='fa $eye fa-fw'></span>
+                                            </a>  
+                                            <a  title='Edit'  class='tools' href='" . BASE_URL . "cr=editorFeedback&action=edit&rowid=" .$key. "'>
                                               <span class='fa fa-pencil fa-fw'></span>
                                             </a>                                   
                                             <a  title='delete' class='tools' href='" . BASE_URL . "cr=feedback&action=delete&rowid=" .$key. "'>
                                               <span class='fa fa-trash-o fa-fw'></span>
                                             </a>"
                                     ;
-                                  }                                   
+                                  } 
                            echo  "</div>
-                                 <div class='panel-body'>$feedback[text]</div>
+                                 <div class='panel-body'>
+                                 <img src='" . I_PATH . $feedback[img] . "'>
+                                  $feedback[text]
+                                 </div>
                                  <div class='panel-footer'>"
                              ;
                                 if($feedback['changed']){
@@ -50,6 +59,7 @@
                               </td>    
                             </tr>"
                           ;
+                     }    
                    }
                    ?>
                 <tbody>      
@@ -98,16 +108,18 @@
                   </div>
                 </form>
               </div>  
+                
               <div class="col-sm-6">  
-              <form id="imageForm" action="<?php echo  BASE_URL . '?cr=editorFeedback&action=saveImage' ;?>" method="post" >
-                  <div>
-                      <input type="file"  id="photo" style="display: none">
-                  </div>
-                  <div>
-                      <ul id="preview-photo">
-                      </ul>
-                  </div>
-              </form>
+                  
+                <form id="imageForm" action="<?php echo  BASE_URL  ;?>" method="post" >                  
+                    <div>
+                        <input type="file"  id="photo" style="display: none">
+                    </div>
+                    <div>
+                        <ul id="preview-photo">
+                        </ul>
+                    </div>
+                </form>
               </div>  
             </div>            
         </div> 

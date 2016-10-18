@@ -2,7 +2,7 @@
 class dataSource
 {
   public $data = array();
-  private $conditions;
+  private $conditions = array();
     
   public function __construct(){
     $this->db = new db();
@@ -26,7 +26,6 @@ class dataSource
     $data = array();
     
     $sql = "SELECT * FROM " . $table . $this->condition();
-
     $query = $this->db->runQuery( $sql );
   
     if($query){

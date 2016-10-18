@@ -32,6 +32,7 @@ class authController  {
       $this->user = $this->auth ->user; 
     }
     echo ($result['system_code']);
+    
   }
   public function logout($get){
     unset ($this -> user);
@@ -78,70 +79,4 @@ class authController  {
       );
     }
   }
-
-  public function actionUploadFile($model) {
-    function toBytes($str){
-      $val = trim($str);
-      $last = strtolower($str[strlen($str)-1]);
-      switch($last) {
-        case 'g': $val *= 1024;
-        case 'm': $val *= 1024;
-        case 'k': $val *= 1024;
-      }
-      return $val;
-    }
-    $dirpath = 'uploads/'.$model.'/';
-    if(isset($_GET['id']) && is_numeric($_GET['id'])){
-      $id = $_GET['id'];
-      unset($_GET['id']);
-      $strlength = strlen($id);
-      for($i=0;$i<$strlength;$i++){
-        $dirpath .=substr($id, $i, 1).'/';
-      }
-    }
-    
-    $allowedExtensions = array('jpg','jpeg','png', 'gif', 'doc', 'docx', 'pdf', 'csv');
-    $sizeLimit = 10 * 1024 * 1024; // 10 Mb
-    $postSize = toBytes(ini_get('post_max_size'));
-    $uploadSize = toBytes(ini_get('upload_max_filesize'));
-    $sizeLimit = min($sizeLimit, $postSize, $uploadSize);
-    $path = $_SERVER['DOCUMENT_ROOT'].'/'.$dirpath;
-    mk_dir($path);
-    $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
-    $result = $uploader->handleUpload($path);
-    
-    if(safe($result, 'success')) {
-      $models = $models_prot = array_map('trim', explode(',', MODELS));
-      $models = array_change_case($models);
-      $key = array_search(self::getClassName($_GET['model']), $models);
-      if($key !== false) {
-        $modelFor = $models_prot[$key]; // unix files 'user' and 'User' are not equal
-      } else {
-        response('405', array('system_code' => 'ERR_SERVICE'));
-      }
-      $this -> model = CActiveRecord::model($modelFor);
-
-      if($result['extention'] == 'csv'){
-        $file = $result['directory'].$result['filename'];
-        $result = $this -> model -> addContent($file);
-      }else{
-        $headers = getallheaders ();
-        $this -> method = strtolower($_SERVER['REQUEST_METHOD']);
-        $auth = new Auth(safe($headers,'Authorization'));
-
-        if(!$auth ->checkToken()) {
-          $error = $auth->getAuthError();
-          response('401', $error);
-        }
-
-        $this -> user = $auth -> user;
-        if(!$auth->user['can_edit']) {
-          $this->sendPermissionError();
-        }
-        $result = $this -> model -> addFile($id, $uploader->getName(), $dirpath.$result['filename']);
-      }
-
-    }
-    echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
-    }
 }
