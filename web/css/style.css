@@ -1,3 +1,66 @@
 .tools{
-    float:right;
+  float:right;
+}
+.panel-body>img{
+  float:left;
+    
+}
+.hide {
+  display: none;
+}
+.border {
+  border: 3px solid #ddd;
+}
+.first{
+  width: 100%;
+}
+
+.top-menu li {
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    float: left;
+    line-height: 50px;
+    padding: 0px;
+}
+.top-menu.profile-box li {
+    line-height: 16px;
+}
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+
+
+
+.top-menu li >a {
+    color: #979898;
+    text-align: center;
+    padding: 22px 15px;
+    font-size: 16px;
+}
+
+
+.profile-box .holder-box {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    margin: 0 0 0 3px;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+#feedbackTable > tbody > tr > td{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

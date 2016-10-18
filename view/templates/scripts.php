@@ -4,3 +4,4 @@
   
     <script src="web/js/editor.js"></script>
     <script src="web/js/preview.js"></script>
+    <script src="web/js/jquery.tablesorter.min.js"></script>

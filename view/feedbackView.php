@@ -17,53 +17,85 @@
 			<!-- Page Content Start -->
         <div class="container">
             <div class="row">
-                <table class="table table-striped">
+                <div class='panel panel-default'>
+                   <div class='panel-heading'>
+                      Сортировка
+                   </div>
+                   <div class='panel-body'>
+                      <button type="button" id="dateSort" class="btn btn-default">По дате</button>
+                      <button type="button" id="nameSort" class="btn btn-default">По имени</button>
+                      <button type="button" id="emailSort" class="btn btn-default">По email</button>
+                      <button type="button" id="statusSort" class="btn btn-default">По статусу</button>
+                   </div>  
+                </div>
+                <table id="feedbackTable" class="table">
+                <thead> 
+                <tr> 
+                    <th></th> 
+                    <th></th> 
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr> 
+                </thead>
                 <tbody>   
                    <?php
                    foreach($model->data as $key=>$feedback){
                      $eye = $feedback['status'] ? 'fa-eye' : 'fa-eye-slash';
-                     if($feedback['status'] || $this->user['login'] == 'admin'){
-                       echo
-                            "<tr data-rowid=$key >  
-                              <td>
-                               <div class='panel panel-default'>
-                                 <div class='panel-heading'> 
-                                    ".$feedback[user][name]." 
-                                  <div class='pull-right'>(".$feedback[created_at].")</div>"
-                       ;
-                                 if($this->user['login'] == 'admin'){
-                                    echo   "
-                                            <a  title='Status'  class='tools' data-rowid=".$key.">
-                                              <span class='fa $eye fa-fw'></span>
-                                            </a>  
-                                            <a  title='Edit'  class='tools' href='" . BASE_URL . "cr=editorFeedback&action=edit&rowid=" .$key. "'>
-                                              <span class='fa fa-pencil fa-fw'></span>
-                                            </a>                                   
-                                            <a  title='delete' class='tools' href='" . BASE_URL . "cr=feedback&action=delete&rowid=" .$key. "'>
-                                              <span class='fa fa-trash-o fa-fw'></span>
-                                            </a>"
-                                    ;
-                                  } 
-                           echo  "</div>
-                                 <div class='panel-body'>
-                                 <img src='" . I_PATH . $feedback[img] . "'>
-                                  $feedback[text]
-                                 </div>
-                                 <div class='panel-footer'>"
-                             ;
-                                if($feedback['changed']){
-                                  echo 'изменен администратором';
-                                }
-                          echo "</div>
-                               </div>                               
-                              </td>    
-                            </tr>"
-                          ;
-                     }    
-                   }
+                     if($feedback['status'] || $this->user['login'] == 'admin'){ 
                    ?>
+                      <tr data-rowid=$key >  
+                        <td class="first">
+                         <div class='panel panel-default'>
+                          <div class='panel-heading'> 
+                            <?php echo $feedback[user][name]; ?>
+                            <div class='pull-right'>(<?php echo $feedback[created_at]; ?>)</div>
+                            <?php if($this->user['login'] == 'admin'){ ?>
+                              <a  title='Status'  class='tools' data-rowid=".$key.">
+                                <span class='fa <?php echo $eye; ?>  fa-fw'></span>
+                              </a>  
+                              <a  title='Edit'  class='tools' href='" . BASE_URL . "cr=editorFeedback&action=edit&rowid=" .$key. "'>
+                                <span class='fa fa-pencil fa-fw'></span>
+                              </a>                                   
+                              <a  title='delete' class='tools' href='" . BASE_URL . "cr=feedback&action=delete&rowid=" .$key. "'>
+                                <span class='fa fa-trash-o fa-fw'></span>
+                              </a>
+                            <?php }?>  
+                          </div>
+                           <div class='panel-body'>
+                            <?php if ($feedback[img] != ''){ 
+                             echo  "<img src='" . I_PATH . $feedback[img] . "' class='border'>";
+                            }?>  
+                             <p><?php echo $feedback[text]; ?></p>
+                           </div>
+                           <div class='panel-footer'>
+                           <?php if($feedback['changed']){ ?>
+                            изменен администратором
+                           <?php }?>
+                           </div>
+                         </div>                               
+                        </td>
+                        
+                        <td class='hide'>
+                          <?php echo $feedback[created_at]; ?>
+                        </td>
+                        <td class='hide'>
+                          <?php echo $feedback[user][name]; ?>
+                        </td>
+                        <td class='hide'>
+                          <?php echo $feedback[user][email]; ?>
+                        </td>
+                        <td class='hide'>
+                          <?php echo $feedback[status]; ?>
+                        </td>
+                      </tr>
+                      <?php }?>    
+                    <?php }?>
+                   
                 <tbody>      
-                </table>    
+                </table>
+              <table id="previewTable" class="table">
+               </table>  
             </div>
             
             <div class="row ">

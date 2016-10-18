@@ -1,5 +1,7 @@
 $(document).ready(function() {
     
+   $("#feedbackTable").tablesorter({sortList: [[1,1]]});  
+    
   $('#back').on('click', function(){
     document.location.href="index.php";
   });
@@ -42,18 +44,25 @@ $(document).ready(function() {
     });
 
   });
-
+  
+  
+  var key = 1;
   $( '#preview' ).on( 'click', function(){
-    $("[preview=preview]").remove();
-    var tr = $( "tr:first" ).clone();
-    tr.find(".panel-heading").text("Предварительный просмотр");
-    var body = tr.find(".panel-body");
-    body.text($("[field=text]").val());
     
-    body.prepend( "<img src="+$('CANVAS')[0].toDataURL()+">" );
-    tr.find(".panel-footer").text('');
-    tr.attr('preview', 'preview');
-    tr.appendTo("table");                     
+    if ($('CANVAS')[0] != undefined){
+      key = !key;
+      key ? $(this).html( 'Добавить изображение' ) : $(this).html ( 'Удалить изображение' );
+      $("[preview=preview]").remove();
+      var tr = $( "tr:last" ).clone();
+      tr.find(".panel-heading").text("Предварительный просмотр");
+      var body = tr.find(".panel-body");
+      body.text($("[field=text]").val());
+      body.find('img').remove();
+      body.prepend( "<img src="+$('CANVAS')[0].toDataURL()+">" );
+      tr.find(".panel-footer").text('');
+      tr.attr('preview', 'preview');
+      tr.appendTo("#previewTable");     
+    }
   });
   
   $( '#addImage').on( 'click', function(){
@@ -80,4 +89,35 @@ $(document).ready(function() {
     });
   })
  
+  var d = 0;
+  $("#dateSort").click(function() { 
+      d = !d;
+      var sorting = [[1,d]]; 
+      $("#feedbackTable").trigger("sorton",[sorting]); 
+      return false; 
+  });
+  
+  var n = 0;
+  $("#nameSort").click(function() { 
+      n = !n;
+      var sorting = [[2,n]]; 
+      $("#feedbackTable").trigger("sorton",[sorting]); 
+      return false; 
+  });
+  
+  var e = 0;
+  $("#emailSort").click(function() { 
+      e = !e;
+      var sorting = [[3,e]]; 
+      $("#feedbackTable").trigger("sorton",[sorting]); 
+      return false; 
+  });
+  
+  var s = 0;
+  $("#statusSort").click(function() { 
+      s = !s;
+      var sorting = [[4,s]]; 
+      $("#feedbackTable").trigger("sorton",[sorting]); 
+      return false; 
+  });     
 })

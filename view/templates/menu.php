@@ -6,5 +6,5 @@
 							</li>
 							<li><a href="/?cr=feedback">Гостевая</a></li>
 						</ul>
-					</div>
+					</div>         
 				</nav>
