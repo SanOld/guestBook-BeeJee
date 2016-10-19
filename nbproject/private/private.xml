@@ -3,25 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/view/templates/scripts.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/db_config.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/web/js/bootstrap.js</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/classes/auth.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/web/js/preview.js</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/cfg.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/controller/authController.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/web/js/editor.js</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/model/editorFeedbackModel.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/index.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/controller/editorFeedbackController.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/classes/dataSource.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/route.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/view/loginView.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/view/editorFeedbackView.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/web/js/jquery.js</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/controller/feedbackController.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/classes/utils.php</file>
-            <file>file:/E:/Work/Servers/OpenServerTest/domains/guestBook-Bee-Jee/view/feedbackView.php</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/cfg.php</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/view/templates/scripts.php</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/view/editorFeedbackView.php</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/web/js/editor.js</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/sql/01.patch</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/view/feedbackView.php</file>
+            <file>file:/D:/work/OpenServer1/domains/guestBook-BeeJee/web/js/preview.js</file>
         </group>
     </open-files>
 </project-private>

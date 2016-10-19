@@ -9,11 +9,11 @@
 			<!-- Header -->
 			<?php include('templates/header.php'); ?>
 			<!-- Header Ends -->
-			
+
 			 <!-- Navbar Start -->
 			<?php include('templates/menu.php'); ?>
-			
-			
+
+
 			<!-- Page Content Start -->
         <div class="container">
           <div class="row">
@@ -25,14 +25,14 @@
                 <label  class="col-sm-2 control-label">Имя</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control"  name="fields[]" value="name" style="display: none">
-                  <input type="text" class="form-control"  name="values[]" value="<?php echo $model->data[user][name]; ?>">
+                  <input type="text" class="form-control"  name ="name" field ="name" value="<?php echo $model->data[user][name]; ?>">
                 </div>
-              </div>                   
+              </div>
               <div class="form-group">
                 <label  class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control"  name="fields[]" value="email" style="display: none">
-                  <input type="text" class="form-control"  name="values[]" value="<?php echo $model->data[user][email]; ?>">
+                  <input type="email" class="form-control"  name ="email" field ="email" value="<?php echo $model->data[user][email]; ?>">
                 </div>
               </div>
               <div class="form-group">
@@ -40,9 +40,9 @@
                 <div class="col-sm-10">
                   <input type="text " class="form-control"  name="fields[]" value="text" style="display: none">
                   <!--<input type="text" class="form-control"  name="values[]" value="" style="display: none">-->
-                  <textarea  class="form-control"  name="values[]"  cols="40" rows="6" required ><?php echo $model->data[text]; ?></textarea>
+                  <textarea  class="form-control"  name ="text" field ="text"  cols="40" rows="6" required ><?php echo $model->data[text]; ?></textarea>
                 </div>
-              </div>  
+              </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="button" id="sbt" class="btn btn-default">Сохранить</button>
@@ -54,11 +54,11 @@
 
 		</div>
 		<!-- Page Content Ends -->
-    
+
 		<?php include('templates/footer.php'); ?>
 
 		<div class="md-overlay"></div>
-		
+
 		<?php include('templates/scripts.php'); ?>
 
 	</body>

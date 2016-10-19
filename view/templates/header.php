@@ -2,10 +2,10 @@
   <div class="container">
     <div class="logo p-0 m-t-10 m-b-10 col-xs-6">
       <a href="#" target="_self">
-        <img src="" alt="logo">ЛОГОТИП
+        <img src="web/images/avatar.jpg" alt="logo">ЛОГОТИП
       </a>
     </div>
-    <ul class="list-inline navbar-right top-menu top-right-menu profile-box">  
+    <ul class="list-inline navbar-right top-menu top-right-menu profile-box">
       <!-- user login dropdown start-->
       <li class="dropdown text-center">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -23,10 +23,10 @@
           <?php } else { ?>
             <li><a href="index.php?cr=auth&action=showLoginForm"><i class="fa fa-sign-out"></i>Войти</a></li>
           <?php }  ?>
-          
+
         </ul>
       </li>
-      <!-- user login dropdown end -->       
+      <!-- user login dropdown end -->
     </ul>
   </div>
 </header>

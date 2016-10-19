@@ -12,18 +12,18 @@ class editorFeedbackController extends authController
     parent::__construct();
     $this->rowid = $rowid ;
     $this->model = new editorFeedbackModel( 'feedback', $this->rowid );
-    
+
     $this->feedbackUserModel = new browserUserModel('user');
   }
-  
+
   public function edit( $arg = array() ){
     $this->render( 'editorFeedbackView', $this->model );
   }
-  
+
   public function toggle( $arg = array() ){
 
     $query = $this->model->update( 'feedback', array('status'), array(!(int)$this->model->data['status']), $this->rowid );
-    
+
     if($query){
       responseText('SUCCESSFUL', 'put');
     } else {
@@ -32,7 +32,7 @@ class editorFeedbackController extends authController
   }
 
   public function save($arg){
-    
+
     $data = array_combine($arg['fields'], $arg['values']);
     $fields = array();
     $values = array();
@@ -43,7 +43,7 @@ class editorFeedbackController extends authController
       $fields[] = 'img';
       $values[] = $fileName;
     }
-    
+
     if($this->rowid == 0){
       $this->feedbackUserModel->andWhere( 'name', $data['name'] , '=' );
       $this->feedbackUserModel->andWhere( 'email', $data['email']  , '=' );
@@ -52,53 +52,52 @@ class editorFeedbackController extends authController
         $user_id = $this->feedbackUserModel->insert('user', array('name', 'email'), array($data['name'] , $data['email']));
         $fields[] = 'user_id';
         $values[] = $user_id;
-      } else {  
+      } else {
         $user_id = array_shift($feedbackUser)['id'];
         $fields[] = 'user_id';
         $values[] = $user_id;
       }
-        $this->model->insert( 'feedback',$fields, $values );
+        $result = $this->model->insert( 'feedback',$fields, $values );
     } else {
-      
+
       if ($this->user['login'] == 'admin'){
         $fields[] = 'changed';
         $values[] = 1;
       }
 
-      $query = $this->model->update( 'feedback', $fields, $values, $this->rowid );
+      $result = $this->model->update( 'feedback', $fields, $values, $this->rowid );
       $this->model->refresh();
-
-      if($query){
-        responseText('SUCCESSFUL', 'update');
-      } else {
-        responseText('ERROR', 'update');
-      }
-      
     }
-    
+
     if(isset($arg['photos']) && count($arg['photos']) >= 1){
         $this->saveImage($arg['photos'][0], $fileName);
     }
+
+    if($result){
+      responseText('SUCCESSFUL', 'update');
+    } else {
+      responseText('ERROR', 'update');
+    }
   }
-  
+
   public function saveImage($fileBody, $fileName){
 
         // декодируем содержимое файла
         $fileBody = preg_replace('#^data.*?base64,#', '', $fileBody);
         $fileBody = base64_decode($fileBody);
-        
+
         // сохраем файл
         file_put_contents(IMG_PATH . $fileName , $fileBody);
 
   }
-  
+
   public function getImageName($fileBody = ''){
     if($fileBody != '')
     $fileName = md5(time() . $n); // генерируем рандомное название файла
     preg_match('#data:image\/(png|jpg|jpeg|gif);#', $fileBody, $fileTypeMatch);
     $fileType = $fileTypeMatch[1];
-    
+
     return  $fileName . '.' . $fileType;
   }
-   
+
 }

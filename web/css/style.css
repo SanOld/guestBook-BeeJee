@@ -1,9 +1,12 @@
+img{
+  margin-right: 20px;
+}
 .tools{
   float:right;
 }
 .panel-body>img{
   float:left;
-    
+
 }
 .hide {
   display: none;
