@@ -67,11 +67,11 @@ function responseText($code, $method = '') {
     );
 
     $methodsDone = array (
-        'get'    => 'Выбраны',
-        'post'   => 'Добавлены',
-        'put'    => 'Обновлены',
-        'update' => 'Обновлены',
-        'delete' => 'Удалены'
+        'get'    => 'выбраны',
+        'post'   => 'добавлены',
+        'put'    => 'обновлены',
+        'update' => 'обновлены',
+        'delete' => 'удалены'
     );
     $method = $method?$method:'get';
     $message = '';

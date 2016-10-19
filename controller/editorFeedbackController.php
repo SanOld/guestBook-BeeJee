@@ -58,6 +58,7 @@ class editorFeedbackController extends authController
         $values[] = $user_id;
       }
         $result = $this->model->insert( 'feedback',$fields, $values );
+        $method = 'post';
     } else {
 
       if ($this->user['login'] == 'admin'){
@@ -67,6 +68,7 @@ class editorFeedbackController extends authController
 
       $result = $this->model->update( 'feedback', $fields, $values, $this->rowid );
       $this->model->refresh();
+      $method = 'update';
     }
 
     if(isset($arg['photos']) && count($arg['photos']) >= 1){
@@ -74,9 +76,9 @@ class editorFeedbackController extends authController
     }
 
     if($result){
-      responseText('SUCCESSFUL', 'update');
+      responseText('SUCCESSFUL', $method);
     } else {
-      responseText('ERROR', 'update');
+      responseText('ERROR', $method);
     }
   }
 

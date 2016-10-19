@@ -63,11 +63,10 @@ class dataSource
     $rowid = 0;
     $i = count( $fields );
     while( $i-- ){
-        $fields[$i] = placeholder('?', $fields[$i]);
         $values[$i] = placeholder('?', $values[$i]);
     }
 
-    $sql = "INSERT INTO " . $table . " ( " . implode(", ", $fields) . ") VALUES ( '" . implode("', '", $values) . "')";
+    $sql = "INSERT INTO " . $table . " ( " . implode(", ", $fields) . ") VALUES ( " . implode(", ", $values) . ")";
     $query = $this->db->runQuery( $sql );
     if($query){
       $rowid = mysql_insert_id();
