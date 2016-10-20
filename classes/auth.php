@@ -4,10 +4,10 @@ class auth {
   public $token = '';
   public $user = array();
   public $live = 12;
-  
+
   public function __construct($token = false, $user = false) {
     $this->db = new db();
-    
+
     if($token) {
       $this->token = $token;
       if($user) {
@@ -18,8 +18,8 @@ class auth {
         $query = $this->db->runQuery( $sql );
 
         if( $query ){
-           $this->user  = mysql_fetch_assoc( $query );
-           $this->token = $this->user['auth_token'];  
+          $this->user  = mysql_fetch_assoc( $query );
+          $this->token = $this->user['auth_token'];
         }
       }
     }
@@ -28,10 +28,9 @@ class auth {
   public function login($get) {
 
 
-    
+
     if(safe($get, 'login') && safe($get, 'password') || safe($get, 'loginKey')) {
 
-    
       if($key = safe($get, 'loginKey')) {
         $loginKey = explode(':',base64_decode($key));
         $login = $loginKey[0];
@@ -40,18 +39,16 @@ class auth {
         $login = $get['login'];
         $password = $get['password'];
       }
-      
-      
-      
+
       $sql = "SELECT * FROM user WHERE login='" . safe($get, 'login') . "' AND password = '". md5(safe($get, 'password')) . "'";
       $query = $this->db->runQuery( $sql );
+
       if( $query ){
-         $this->user  = mysql_fetch_assoc( $query );
-         $this->token = $this->user['token'];  
+        $this->user  = mysql_fetch_assoc( $query );
+        $this->token = $this->user['token'];
       }
 
       if($this->user ) {
-
         $authToken = $this->user['auth_token'];
         $auth = new Auth($authToken, $this->user);
         if($authToken && $auth->checkToken()) {
@@ -59,17 +56,15 @@ class auth {
         } else {
           $authToken = md5($password.'/'.strtotime('now'),false);
         }
-        
-        
-        
+
         $this->model = new editorUserModel( 'user', $this->user['id'] );
         $this->model->update('user',array('auth_token', 'auth_token_created_at') ,array($authToken, date('Y-m-d H:i:s')) ,$this->user['id']);
-          
+
         $this->user['auth_token'] = $authToken;
         $this->user['auth_token_created_at'] = $toUpdate['auth_token_created_at'];
 
 
-        
+
         $res = array( 'result'      => true
                     , 'system_code' => 'LOGIN_SUCCESSFUL'
                     , 'code'        => '200'
@@ -78,8 +73,8 @@ class auth {
                     , 'user'        => $this->user
                     , 'expiredAt'   => strtotime('+'.$this->live.' hour')
                     );
-        
-        $_SESSION['login'] = $login;   
+
+        $_SESSION['login'] = $login;
         $_SESSION['token'] = $authToken;
 
       } else {
@@ -96,14 +91,14 @@ class auth {
       $res = array( 'result'      => false
                   , 'system_code' => 'ERR_AUTH_FAILED'
                   , 'code'        => '401'
-                  );      
+                  );
     }
     return $res;
 
   }
   public function logout(){
-     $_SESSION = array(); 
-     session_destroy(); 
+     $_SESSION = array();
+     session_destroy();
      $this->user = array();
   }
   public function getUser() {

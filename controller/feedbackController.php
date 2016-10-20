@@ -12,7 +12,7 @@ class feedbackController extends authController
   public function createTable(){
     $this->render('feedbackView', $this->model );
   }
-  
+
   public function delete( $arg ){
     $this->model->delete( 'feedback', $arg['rowid'] );
     $this->model->refresh();

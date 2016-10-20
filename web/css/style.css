@@ -8,9 +8,7 @@ img{
   float:left;
 
 }
-.hide {
-  display: none;
-}
+
 .border {
   border: 3px solid #ddd;
 }
@@ -63,7 +61,10 @@ img{
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-#feedbackTable > tbody > tr > td{
+#feedbackTable > tbody > tr > td, #feedbackTable > thead > tr > th{
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+.hide{
+  width: 0px;
 }

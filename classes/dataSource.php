@@ -26,10 +26,6 @@ class dataSource
     $data = array();
 
     $sql = "SELECT * FROM " . $table . $this->condition();
-
-//    print_r($sql);
-//    die();
-
     $query = $this->db->runQuery( $sql );
 
     if($query){
@@ -86,12 +82,12 @@ class dataSource
     $i = count( $fields );
     while( $i-- ){
         $values[$i] = placeholder('?', $values[$i]);
-        $arr[] = ( $fields[$i] . " = " . $values[$i]);
+        $arr[] = ( $fields[$i] . " = " . $values[$i]) ;
     }
     if(is_array( $arr )) {
         $set = implode( ", ", $arr );
     }
-    $sql = "UPDATE $table SET " . $set . " WHERE 'id'= " . $rowid  ;
+    $sql = "UPDATE $table SET " . $set . " WHERE id= " . $rowid  ;
     $query = $this->db->runQuery( $sql );
     return $query;
   }

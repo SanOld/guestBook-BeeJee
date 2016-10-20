@@ -22,12 +22,12 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   PRIMARY KEY (`id`),
   KEY `FK_feedback_user` (`user_id`),
   CONSTRAINT `FK_feedback_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы testbeejee.feedback: ~4 rows (приблизительно)
+-- Дамп данных таблицы testbeejee.feedback: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
 INSERT INTO `feedback` (`id`, `text`, `img`, `user_id`, `created_at`, `changed`, `status`) VALUES
-	(46, 'Текст отзыва - тест', '', 36, '2016-10-18 08:46:49', 1, 1);
+	(46, 'test text', '', 36, '2016-10-18 08:46:49', 1, 1);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 
 
@@ -41,12 +41,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` char(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы testbeejee.user: ~34 rows (приблизительно)
+-- Дамп данных таблицы testbeejee.user: ~6 rows (приблизительно)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `auth_token`, `auth_token_created_at`, `login`, `password`, `name`, `email`) VALUES
-	(1, 'da58e2ec10d04d3188524e9d600e44d4', '2016-10-18 23:41:41', 'admin', '202cb962ac59075b964b07152d234b70', 'Alex', 'shehovtsov_av@mail.ru'),
+	(1, '1209047b49f6697ae3ac126834ae0e90', '2016-10-20 09:16:58', 'admin', '202cb962ac59075b964b07152d234b70', 'Alex', 'shehovtsov_av@mail.ru'),
 	(36, '0', '0000-00-00 00:00:00', '', '', 'Иван', 'ivanov@some.ru');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

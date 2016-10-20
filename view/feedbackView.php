@@ -73,7 +73,7 @@
                                   <a  title='Edit'  class='tools' href='<?php echo BASE_URL; ?>cr=editorFeedback&action=edit&rowid=<?php echo $key; ?>'>
                                     <span class='fa fa-pencil fa-fw'></span>
                                   </a>
-                                  <a  title='delete' class='tools'  href='<?php echo BASE_URL; ?>cr=editorFeedback&action=delete&rowid=<?php echo $key; ?>'>
+                                  <a  title='delete' class='tools'  href='<?php echo BASE_URL; ?>cr=feedback&action=delete&rowid=<?php echo $key; ?>'>
                                     <span class='fa fa-trash-o fa-fw'></span>
                                   </a>
                                 <?php }?>
