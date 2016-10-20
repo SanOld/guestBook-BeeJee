@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
               <div class="jumbotron">
-                <h1>Привет, мир!</h1>
+                <h1>Тест!</h1>
                 <p>...</p>
               </div>
             </div>

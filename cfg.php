@@ -1,15 +1,16 @@
 <?php
-const BASE = 'http://guestBook-BeeJee';
-const BASE_URL ='http://guestBook-BeeJee/index.php?';
+define( 'BASE' ,    'http://920654.testgb.web.hosting-test.net');
+define( 'BASE_URL', 'http://920654.testgb.web.hosting-test.net/index.php?');
 
-const BASE_PATH =     __DIR__ . '/';
-const CLASS_PATH =    __DIR__ . '/classes/';
-const C_PATH =        __DIR__ . '/controller/';
-const M_PATH =        __DIR__ . '/model/';
-const V_PATH =        __DIR__ . '/view/';
-const CSS_PATH =      __DIR__ . '/web/css/';
-const JS_PATH =       __DIR__ . '/web/js/';
-const IMG_PATH =      __DIR__ . '/web/img/';
-const I_PATH =        BASE    . '/web/img/';
+
+define ('BASE_PATH',    __DIR__.   '/');
+define ('CLASS_PATH',   __DIR__.   '/classes/');
+define ('C_PATH',       __DIR__.   '/controller/');
+define ('M_PATH',       __DIR__.   '/model/');
+define ('V_PATH',       __DIR__.   '/view/');
+define ('CSS_PATH',     __DIR__.   '/web/css/');
+define ('JS_PATH',      __DIR__.   '/web/js/');
+define ('IMG_PATH',     __DIR__.   '/web/img/');
+define ('I_PATH',       BASE.      '/web/img/');
 
 ?>
